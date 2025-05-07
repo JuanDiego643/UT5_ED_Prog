@@ -27,9 +27,7 @@ abstract class Vehiculo {
 Vehiculo "1" <|-- "1" Coche: Hereda de
 Vehiculo "1" <|-- "1" Moto: Hereda de
 Vehiculo "1" <|-- "1" Camion: Hereda de
-Vehiculo "1" *-- "0-1" Persona : propietario
-
-
+Vehiculo "1" *-- "0..1" Persona : propietario
 
 class Coche {
    - int: numPuertas
@@ -88,11 +86,13 @@ enum NivelDeRiesgo {
     MEDIO
     BAJO
 }
+Vehiculo "1" *-- "1" NivelDeRiesgo
 
 enum estadoVehiculo {
 VENDIDO
 DISPONIBLE
 }
+Vehiculo "1" *-- "1" estadoVehiculo
 
 enum TipoCombustible {
     GASOLINA
@@ -100,27 +100,31 @@ enum TipoCombustible {
     HÍBRIDO
     ELÉCTRICO
 }
+Coche "1" o-- "1" TipoCombustible
+
 
 enum Traccion {
     DELANTERA
     TRASERA
     4X4
 }
+Coche "1" *-- "1" Traccion
 
 enum NivelConfort {
     BÁSICO
     MEDIO
     PREMIUM
 }
-
+Sedan "1" *-- "1" NivelConfort
 enum TipoTransmision {
     MANUAL
     AUTOMÁTICA
 }
+Moto "1" o-- "1"TipoTransmision
 
 
 interface Valorable {
-+{abstract} calcularDepresiacion(): double
++{abstract} calcularDepreciacion(): double
 }
 Valorable <|.. Vehiculo: Implementa
 @enduml
