@@ -1,34 +1,99 @@
 @startuml
  skinparam classAttributeIconSize 0
+
  class Persona {
-     - String: nombre
-     - String: apellidos
-     - String: DNI
-     - LocalDate: fechaCaducidadCarnet
-     - int: anioNacimiento
+    - String: nombre
+    - String: apellidos
+    - String: DNI
+    - LocalDate: fechaCaducidadCarnet
+    - int: anioNacimiento
+    +ValidarDNI(): boolean
+    +CalcularEdad(): int
+    +CalcularExperienciaConduccion(): int
  }
 abstract class Vehiculo {
-    - String: matricula
-    - String: marca
-    - String: modelo
-    - int: añoFabricacion
-    - int: kilometraje
-    - double: precio
-    - estadoVehiculo: estado
-    - Persona: propietario
+   - String: matricula
+   - String: marca
+   - String: modelo
+   - int: anioFabricacion
+   - int: kilometraje
+   - double: precio
+   - estadoVehiculo: estado
+   - Persona: propietario
 
+    +{abstract}CalcularRiesgo():
+    +imprimirDatos():void
 }
+Vehiculo "1" <|-- "1" Coche: Hereda de
+Vehiculo "1" <|-- "1" Moto: Hereda de
+Vehiculo "1" <|-- "1" Camion: Hereda de
+Vehiculo "1" *-- "0-1" Persona : propietario
+
+
+
+class Coche {
+   - int: numPuertas
+   - TipoCombustible: tipoCombustible
+   - int: capacidadMaletero
+   - Traccion: traccion
+}
+Coche"1" <|--"1" Sedan
+Coche"1" <|--"1" SUV
+Coche"1" <|--"1" Deportivo
+
+class Sedan {
+   - double: espacioInterior
+   - NivelConfort: confort
+}
+
+
+class SUV {
+   - boolean: capacidadOffroad
+   - double: alturaLibreSuelo
+}
+
+class Deportivo {
+   - double: aceleracion
+   - int: potenciaCV
+   - boolean: tieneModoPista
+}
+
+class Moto{
+   - int: cilindrada
+   - int: peso
+   - double: alturaAsiento
+   - TipoTransmision: tipoTransmision
+}
+Moto"1" <|--"1" Scooter
+Moto"1" <|--"1" MotoDeportiva
+
+class Scooter{
+   - int: espacioBajoAsiento
+}
+
+class MotoDeportiva {
+   - double: velocidadMaxima
+   - boolean: tieneQuickShifter
+}
+
+class Camion {
+   - double: capacidadCarga
+   - int: numEjes
+   - double: longitudRemolques
+   - int: potenciaMotor
+}
+
+enum NivelDeRiesgo {
+    ALTO
+    MEDIO
+    BAJO
+}
+
 enum estadoVehiculo {
 VENDIDO
 DISPONIBLE
 }
 
-class Coche {
-    - int: numPuertas
-    - TipoCombustible: tipoCombustible
-    - int: capacidadMaletero
-    - Traccion: traccion
-}
 enum TipoCombustible {
     GASOLINA
     DIESEL
@@ -42,51 +107,20 @@ enum Traccion {
     4X4
 }
 
-class Sedan {
-    -double: espacioInterior
-    -NivelConfort: confort
-}
 enum NivelConfort {
     BÁSICO
     MEDIO
     PREMIUM
 }
 
-class SUV {
-    -boolean: capacidadOffroad
-    -double: alturaLibreSuelo
-}
-
-class Deportivo {
-    -double: aceleracion
-    -int: potenciaCV
-    -boolean: tieneModoPista
-}
-
-class Moto{
-    -int: cilindrada
-    -int: peso
-    -double: alturaAsiento
-    -TipoTransmision: tipoTransmision
-}
 enum TipoTransmision {
     MANUAL
     AUTOMÁTICA
 }
 
-class Scooter{
-    -int: espacioBajoAsiento
-}
 
-class MotoDeportiva {
-    -double: velocidadMaxima
-    -boolean: tieneQuickShifter
+interface Valorable {
++{abstract} calcularDepresiacion(): double
 }
-
-class Camion {
-    -double: capacidadCarga
-    -int: numEjes
-    -double: longitudRemolques
-    int: potenciaMotor
-}
+Valorable <|.. Vehiculo: Implementa
 @enduml
