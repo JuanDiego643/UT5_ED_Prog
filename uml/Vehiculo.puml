@@ -1,4 +1,92 @@
 @startuml
-class Vehiculo {
+ skinparam classAttributeIconSize 0
+ class Persona {
+     - String: nombre
+     - String: apellidos
+     - String: DNI
+     - LocalDate: fechaCaducidadCarnet
+     - int: anioNacimiento
+ }
+abstract class Vehiculo {
+    - String: matricula
+    - String: marca
+    - String: modelo
+    - int: añoFabricacion
+    - int: kilometraje
+    - double: precio
+    - estadoVehiculo: estado
+    - Persona: propietario
+
+}
+enum estadoVehiculo {
+VENDIDO
+DISPONIBLE
+}
+
+class Coche {
+    - int: numPuertas
+    - TipoCombustible: tipoCombustible
+    - int: capacidadMaletero
+    - Traccion: traccion
+}
+enum TipoCombustible {
+    GASOLINA
+    DIESEL
+    HÍBRIDO
+    ELÉCTRICO
+}
+
+enum Traccion {
+    DELANTERA
+    TRASERA
+    4X4
+}
+
+class Sedan {
+    -double: espacioInterior
+    -NivelConfort: confort
+}
+enum NivelConfort {
+    BÁSICO
+    MEDIO
+    PREMIUM
+}
+
+class SUV {
+    -boolean: capacidadOffroad
+    -double: alturaLibreSuelo
+}
+
+class Deportivo {
+    -double: aceleracion
+    -int: potenciaCV
+    -boolean: tieneModoPista
+}
+
+class Moto{
+    -int: cilindrada
+    -int: peso
+    -double: alturaAsiento
+    -TipoTransmision: tipoTransmision
+}
+enum TipoTransmision {
+    MANUAL
+    AUTOMÁTICA
+}
+
+class Scooter{
+    -int: espacioBajoAsiento
+}
+
+class MotoDeportiva {
+    -double: velocidadMaxima
+    -boolean: tieneQuickShifter
+}
+
+class Camion {
+    -double: capacidadCarga
+    -int: numEjes
+    -double: longitudRemolques
+    int: potenciaMotor
 }
 @enduml
