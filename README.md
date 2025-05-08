@@ -17,6 +17,11 @@ Sistema de gestión de un concecionario. Creación de un diagrama de clases con 
 - [x] Exportar diagrama PlantUML a SVG
 - [x] Modificar README.md
 - [x] Insertar diagrama.svg en README.md
+- [x] Crear carpeta src
+
+![Diagrama de clases](uml/diagrama_clases.svg)
+
+
 
 
 
